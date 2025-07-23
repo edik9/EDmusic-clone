@@ -1,10 +1,9 @@
 import { Song } from "../models/song.model.js";
 import { User } from "../models/user.model.js";
 import { Album } from "../models/album.model.js";
-import { Promise } from "mongoose";
 export const getStats = async (req, res) => {
   try {
-    const [totaSongs, totaUsers, totaAlbums, uniqueArtists] = await Promise.all([
+    const [totalSongs, totalUsers, totalAlbums, uniqueArtists] = await Promise.all([
       Song.countDocuments(),
       User.countDocuments(),
       Album.countDocuments(),
@@ -28,9 +27,9 @@ export const getStats = async (req, res) => {
     ])
 
     res.status(200).json({
-      totaAlbums,
-      totaSongs,
-      totaUsers,
+      totalAlbums,
+      totalSongs,
+      totalUsers,
       totalArtists: uniqueArtists[0]?.count || 0
     })
   } catch (error) {
